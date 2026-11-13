@@ -1,0 +1,756 @@
+{
+ "ok": true,
+ "passed": 107,
+ "failed": 0,
+ "checks": [
+  {
+   "check": "supplier: primary key unique",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "supplier: required fields present",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "supplier.role: allowed values",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "supplier.status: allowed values",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "supplier.name: unique",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "supplier: ID format",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "instrument_type: primary key unique",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "instrument_type: required fields present",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "instrument_type.criticality: allowed values",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "instrument_type: ID format",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "instrument_type_supplier: primary key unique",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "instrument_type_supplier: required fields present",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "instrument_type_supplier.type_id -> instrument_type.type_id: FK integrity",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "instrument_type_supplier.supplier_id -> supplier.supplier_id: FK integrity",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "asset: primary key unique",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "asset: required fields present",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "asset.status: allowed values",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "asset.type_id -> instrument_type.type_id: FK integrity",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "asset.manufacturer_id -> supplier.supplier_id: FK integrity",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "asset.serial_number: unique",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "asset: ID format",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "calibration_plan: primary key unique",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "calibration_plan: required fields present",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "calibration_plan.status: allowed values",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "calibration_plan.asset_id -> asset.asset_id: FK integrity",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "calibration_plan: ID format",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "emergency_extension: primary key unique",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "emergency_extension: required fields present",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "emergency_extension.reason: allowed values",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "emergency_extension.status: allowed values",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "emergency_extension.asset_id -> asset.asset_id: FK integrity",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "emergency_extension.plan_id -> calibration_plan.plan_id: FK integrity",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "emergency_extension: ID format",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "calibration_event: primary key unique",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "calibration_event: required fields present",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "calibration_event.result: allowed values",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "calibration_event.status: allowed values",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "calibration_event.asset_id -> asset.asset_id: FK integrity",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "calibration_event.plan_id -> calibration_plan.plan_id: FK integrity",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "calibration_event.lab_supplier_id -> supplier.supplier_id: FK integrity",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "calibration_event.emergency_extension_id -> emergency_extension.extension_id: FK integrity",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "calibration_event: ID format",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "certificate: primary key unique",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "certificate: required fields present",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "certificate.result: allowed values",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "certificate.status: allowed values",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "certificate.calibration_id -> calibration_event.calibration_id: FK integrity",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "certificate.asset_id -> asset.asset_id: FK integrity",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "certificate.lab_supplier_id -> supplier.supplier_id: FK integrity",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "certificate.calibration_id: unique",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "certificate.certificate_number: unique",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "certificate: ID format",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "work_order: primary key unique",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "work_order: required fields present",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "work_order.wo_type: allowed values",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "work_order.status: allowed values",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "work_order.assigned_role: allowed values",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "work_order.asset_id -> asset.asset_id: FK integrity",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "work_order.calibration_id -> calibration_event.calibration_id: FK integrity",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "work_order: ID format",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "production_use: primary key unique",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "production_use: required fields present",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "production_use.compliance_status: allowed values",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "production_use.asset_id -> asset.asset_id: FK integrity",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "production_use.calibration_id -> calibration_event.calibration_id: FK integrity",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "production_use.exception_id -> emergency_extension.extension_id: FK integrity",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "production_use: ID format",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "alert: primary key unique",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "alert: required fields present",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "alert.alert_type: allowed values",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "alert.severity: allowed values",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "alert.entity_type: allowed values",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "alert.status: allowed values",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "alert.asset_id -> asset.asset_id: FK integrity",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "alert: ID format",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "audit_record: primary key unique",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "audit_record: required fields present",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "audit_record.entity_type: allowed values",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "audit_record.action: allowed values",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "audit_record.asset_id -> asset.asset_id: FK integrity",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "audit_record: ID format",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "calibration_event: performed_date <= next_due_date",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "certificate: issued_date <= valid_until",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "work_order: opened_date <= due_date",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "work_order: opened_date <= closed_date",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "emergency_extension: due_date_original <= extended_until",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "calibration_plan: effective_from <= effective_to",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "supplier: labs accredited",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "bridge: suppliers are calibration labs",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "asset: exactly one active plan",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "plan: interval <= type default",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "plan: tolerance = type tolerance",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "event: deviation = |meas-ref|/ref*100",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "event: PASS iff deviation <= tolerance",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "event: interval applied = plan interval",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "event: unique (asset, performed_date)",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "event: lab approved for instrument type",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "asset: commissioned before first calibration",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "certificate: result/lab/valid_until reconcile with event (due recomputed from plan)",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "certificate: cert_id = CERT-<calibration_id>",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "use_id = USE-<asset>-<timestamp>",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "extension: length <= type max_extension_days",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "work_order: CLOSED iff closed_date",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "work_order: failed calibration has corrective action",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "impact assessment: affected_use_count recomputes from uses",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "audit: lifecycle chain continuous & asset snapshot consistent",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  },
+  {
+   "check": "alert: asset_id exists & severity matches type",
+   "status": "PASS",
+   "violations": 0,
+   "sample": [],
+   "detail": ""
+  }
+ ]
+}

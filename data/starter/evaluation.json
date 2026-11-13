@@ -1,0 +1,104 @@
+{
+ "summary": {
+  "use_decision_accuracy": 1.0,
+  "use_events": 10000,
+  "decision_mismatches": 0,
+  "all_findings_match_ground_truth": true,
+  "ground_truth_rows": 68,
+  "leakage_columns_in_inputs": []
+ },
+ "per_issue_type": {
+  "DUE_DATE_INCONSISTENT": {
+   "truth": 3,
+   "found": 3,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "EXPIRED_USE_NO_EXCEPTION": {
+   "truth": 11,
+   "found": 11,
+   "tp": 11,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "USE_WHILE_QUARANTINED": {
+   "truth": 1,
+   "found": 1,
+   "tp": 1,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "OVERDUE_USE_NONBLOCKING": {
+   "truth": 9,
+   "found": 9,
+   "tp": 9,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "EXTENSION_USE": {
+   "truth": 14,
+   "found": 14,
+   "tp": 14,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "BOUNDARY_DUE_DATE_USE": {
+   "truth": 15,
+   "found": 15,
+   "tp": 15,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "CERT_ASSET_MISMATCH": {
+   "truth": 3,
+   "found": 3,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "MISSING_CERTIFICATE": {
+   "truth": 10,
+   "found": 10,
+   "tp": 10,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "IMPACT_ASSESSMENT_MISSING": {
+   "truth": 2,
+   "found": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  }
+ },
+ "use_status_counts": {
+  "COMPLIANT": 9965,
+  "ADVISORY_OVERDUE": 9,
+  "PROHIBITED_OVERDUE": 11,
+  "COMPLIANT_EXTENSION": 14,
+  "PROHIBITED_QUARANTINE": 1
+ },
+ "origin_counts": {
+  "NATURAL": 50,
+  "INJECTED": 18
+ }
+}

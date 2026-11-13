@@ -1,0 +1,13 @@
+type_id,name,measurand,unit,default_interval_days,tolerance_pct,criticality,prohibit_use_when_overdue,max_extension_days
+ITY-001,Pressure Gauge,pressure,bar,180,1.0,HIGH,1,14
+ITY-002,Digital Thermometer,temperature,degC,365,0.5,MEDIUM,1,10
+ITY-003,Torque Wrench,torque,N.m,180,4.0,HIGH,1,7
+ITY-004,Flow Meter,flow,L/min,365,2.0,HIGH,1,14
+ITY-005,Load Cell,force,kg,365,0.5,HIGH,1,10
+ITY-006,Vernier Caliper,length,mm,365,0.5,LOW,0,0
+ITY-007,Micrometer,length,mm,365,0.3,MEDIUM,1,7
+ITY-008,pH Meter,acidity,pH,180,1.5,MEDIUM,1,5
+ITY-009,Multimeter,voltage,V,365,1.0,LOW,0,0
+ITY-010,Humidity Sensor,humidity,%RH,365,2.0,MEDIUM,0,0
+ITY-011,Conductivity Meter,conductivity,uS/cm,180,2.0,MEDIUM,1,5
+ITY-012,Analytical Balance,mass,g,365,0.1,HIGH,1,10

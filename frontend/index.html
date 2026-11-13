@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calibration Control</title>
+<style>
+:root{--bg:#e9eef0;--panel:#fff;--ink:#14232b;--mute:#5b6b73;--line:#cdd7db;--steel:#2f5d7c;--ok:#1e8e5a;--warn:#b57800;--bad:#c7372f;--okbg:#e0f3e9;--warnbg:#fbf0d4;--badbg:#f9e0de}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1a20;--panel:#172830;--ink:#e6eef1;--mute:#93a6af;--line:#2a3f49;--steel:#7fb2d3;--ok:#4cc58a;--warn:#e0a93a;--bad:#ff7a70;--okbg:#12362a;--warnbg:#3a2f12;--badbg:#42201d}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "Segoe UI",system-ui,sans-serif;display:grid;grid-template-columns:200px 1fr;min-height:100vh}
+nav{padding:20px 14px;border-right:1px solid var(--line);position:sticky;top:0;height:100vh}
+nav h1{font-size:17px;margin:0 0 20px;letter-spacing:.2px}nav button{display:block;width:100%;text-align:left;border:0;background:none;color:var(--ink);padding:9px 10px;border-radius:6px;font:inherit;cursor:pointer}
+nav button[aria-current=true]{background:var(--steel);color:#fff}nav button:focus-visible,input:focus-visible,select:focus-visible,.btn:focus-visible{outline:2px solid var(--steel);outline-offset:2px}
+main{padding:24px 28px;max-width:1150px;width:100%}h2{margin:0 0 14px;font-size:21px}h3{margin:20px 0 8px;font-size:15px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px;margin-bottom:16px}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:end}label{display:flex;flex-direction:column;font-size:13px;color:var(--mute);gap:3px}
+input,select{font:inherit;padding:7px 9px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+.btn{font:inherit;padding:8px 14px;border-radius:6px;border:1px solid var(--steel);background:var(--steel);color:#fff;cursor:pointer}.btn.alt{background:none;color:var(--steel)}
+table{border-collapse:collapse;width:100%;font-size:14px}th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}th{color:var(--mute);font-weight:600}
+tbody tr.click{cursor:pointer}tbody tr.click:hover{background:var(--bg)}.scroll{overflow-x:auto}.num{font-variant-numeric:tabular-nums}
+.tag{display:inline-block;padding:1px 8px;border-radius:10px;font-size:12px;font-weight:600}.ok{background:var(--okbg);color:var(--ok)}.warn{background:var(--warnbg);color:var(--warn)}.bad{background:var(--badbg);color:var(--bad)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}.kpi{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px}.kpi b{display:block;font-size:24px}.kpi span{color:var(--mute);font-size:13px}
+.gate{display:grid;grid-template-columns:150px 1fr;gap:20px;align-items:center;margin-top:16px;padding:18px;border-radius:10px;border:2px solid var(--line)}
+.lamp{width:130px;height:130px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:22px;color:#fff;background:var(--mute)}
+.gate.go{border-color:var(--ok)}.go .lamp{background:var(--ok)}.gate.warn{border-color:var(--warn)}.warn .lamp{background:var(--warn)}.gate.hold{border-color:var(--bad)}.hold .lamp{background:var(--bad)}
+.bars{display:flex;align-items:end;gap:6px;height:130px}.bars div{flex:1;background:var(--steel);position:relative;min-height:2px;border-radius:3px 3px 0 0}.bars div i{position:absolute;bottom:0;left:0;right:0;background:var(--bad)}.bars small{position:absolute;top:100%;left:0;right:0;text-align:center;font-size:11px;color:var(--mute);margin-top:3px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:800px){body{grid-template-columns:1fr}nav{position:static;height:auto;display:flex;flex-wrap:wrap;border:0}nav h1{width:100%;margin:0}nav button{width:auto}.two{grid-template-columns:1fr}.gate{grid-template-columns:1fr}}
+.muted{color:var(--mute)}.err{color:var(--bad)}
+</style></head><body>
+<nav><h1>Calibration Control</h1><div id="tabs"></div></nav><main id="app"></main>
+<script>
+const $=s=>document.querySelector(s),esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const api=async(p,o)=>{const r=await fetch(p,o);let j=null;try{j=await r.json()}catch(e){}return{ok:r.ok,status:r.status,data:j}};
+const cls=s=>/^PROHIBITED|HIGH|FAIL|MISMATCH|MISSING|OVERDUE$|QUARANT/.test(s)?"bad":/ADVISORY|MEDIUM|OVERDUE|OPEN/.test(s)?"warn":"ok";
+const tag=s=>`<span class="tag ${cls(s||"")}">${esc(s)}</span>`;
+const tbl=(cols,rows,click)=>`<div class="scroll"><table><thead><tr>${cols.map(c=>`<th>${esc(c[1])}</th>`).join("")}</tr></thead><tbody>${rows.map((r,i)=>`<tr class="${click?"click":""}" ${click?`data-i="${i}" tabindex="0"`:""}>${cols.map(c=>`<td class="num">${c[2]?c[2](r[c[0]],r):esc(r[c[0]])}</td>`).join("")}</tr>`).join("")||`<tr><td colspan="${cols.length}" class="muted">No rows match.</td></tr>`}</tbody></table></div>`;
+const views={gate,overview,instruments,alerts,quality};const names={gate:"Use gate",overview:"Overview",instruments:"Instruments",alerts:"Alerts",quality:"Data quality"};
+function nav(v){$("#tabs").innerHTML=Object.keys(names).map(k=>`<button data-v="${k}" aria-current="${k==v}">${names[k]}</button>`).join("");location.hash=v;views[v]()}
+$("#tabs").onclick=e=>e.target.dataset.v&&nav(e.target.dataset.v);
+async function gate(){
+ $("#app").innerHTML=`<h2>Can this instrument be used?</h2><div class="panel"><div class="row"><label>Asset ID<input id="aid" value="AST-000001" size="14"></label><label>Date and time<input id="at" type="datetime-local" step="1"></label>
+ <button class="btn" id="chk">Check</button><button class="btn alt" id="rec">Record use</button><button class="btn alt" id="ex">Load a blocked example</button></div>
+ <div id="res" class="muted" style="margin-top:14px">Enter an asset and a time. Checking never changes data; recording a use is refused if policy blocks it.</div></div>`;
+ const at=$("#at");at.value=new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,19);
+ const show=(r,rec)=>{const d=r.data;if(!r.ok&&!d.status)return $("#res").innerHTML=`<span class="err">${esc(d.error||"Request failed")}. Check the asset ID.</span>`;
+  const c=d.status.startsWith("PROHIBITED")?"hold":d.status.startsWith("ADVISORY")?"warn":"go";
+  $("#res").innerHTML=`<div class="gate ${c}"><div class="lamp">${c=="hold"?"HOLD":c=="warn"?"WARN":"GO"}</div><div><b>${esc(d.message)}</b><p class="muted">${esc(d.asset_id)} on ${esc(d.at)}. Status ${tag(d.status)} Governing calibration ${esc(d.calibration_id||"none")}, valid through ${esc(d.due_date||"n/a")}${d.extension_id?`, extension ${esc(d.extension_id)}`:""}.</p>
+  ${rec?(d.blocked?`<p class="err">Use refused. Alert ${esc(d.alert_id)} raised and the attempt was added to the audit trail.</p>`:`<p>Use recorded as ${esc(d.use_id)}.</p>`):""}</div></div>`};
+ const q=()=>`asset_id=${encodeURIComponent($("#aid").value.trim())}&at=${encodeURIComponent($("#at").value)}`;
+ $("#chk").onclick=async()=>show(await api("/api/check?"+q()));
+ $("#rec").onclick=async()=>show(await api("/api/use",{method:"POST",body:JSON.stringify({asset_id:$("#aid").value.trim(),used_at:$("#at").value})}),true);
+ $("#ex").onclick=async()=>{const a=await api("/api/alerts?type=EXPIRED_USE_NO_EXCEPTION&limit=1");if(a.data[0]){$("#aid").value=a.data[0].asset_id;$("#at").value=a.data[0].raised_at;$("#chk").click()}};
+}
+async function overview(){
+ const s=(await api("/api/summary")).data,c=s.counts,k=s.calibration,mx=Math.max(...s.monthly.map(m=>m.uses));
+ const K=(b,l)=>`<div class="kpi"><b class="num">${b}</b><span>${l}</span></div>`;
+ $("#app").innerHTML=`<h2>Overview</h2><div class="kpis">${K(c.assets.toLocaleString(),"instruments")}${K(c.calibrations.toLocaleString(),"calibrations")}${K((k.pass_rate*100).toFixed(1)+"%","pass rate")}${K(c.uses.toLocaleString(),"use events")}${K(c.open_alerts,"open alerts")}${K(k.certificate_gaps,"certificate gaps")}${K(k.failed_without_impact_assessment,"failures without impact assessment")}${K(k.extensions,"emergency extensions")}</div>
+ <div class="panel"><h3 style="margin-top:0">Use events per month <span class="muted">(red = policy-prohibited)</span></h3><div class="bars" style="margin-bottom:22px">${s.monthly.map(m=>`<div style="height:${m.uses/mx*100}%" title="${m.m}: ${m.uses} uses, ${m.prohibited} prohibited"><i style="height:${Math.max(m.prohibited/m.uses*100*8,m.prohibited?3:0)}%"></i><small>${m.m.slice(5)}</small></div>`).join("")}</div></div>
+ <div class="two"><div class="panel"><h3 style="margin-top:0">Use decisions</h3>${tbl([["k","Status",tag],["n","Uses"]],s.use_compliance)}</div><div class="panel"><h3 style="margin-top:0">Instrument status today</h3>${tbl([["k","Status",tag],["n","Instruments"]],s.asset_status)}<h3>Downtime (hours)</h3>${tbl([["k","Work order type"],["n","Hours"]],s.downtime_hours)}</div></div>`}
+async function instruments(){
+ $("#app").innerHTML=`<h2>Instruments</h2><div class="panel"><div class="row"><label>Search<input id="q" placeholder="ID, name or serial"></label><label>Status<select id="st"><option value="">All</option><option>IN_SERVICE</option><option>OVERDUE</option><option>QUARANTINED</option></select></label></div></div><div class="panel" id="list"></div><div id="detail"></div>`;
+ const load=async()=>{const r=(await api(`/api/assets?limit=100&q=${encodeURIComponent($("#q").value)}&status=${$("#st").value}`)).data;
+  $("#list").innerHTML=tbl([["asset_id","Asset"],["name","Name"],["status","Status",tag],["last_calibrated","Last calibrated"],["due_date","Due"],["blocking","Overdue policy",v=>v?"Block":"Warn"],["alerts","Alerts"]],r,true)+`<p class="muted">Showing up to 100 rows.</p>`;
+  $("#list").querySelectorAll("tr.click").forEach(tr=>tr.onclick=()=>detail(r[tr.dataset.i].asset_id))};
+ let t;$("#q").oninput=()=>{clearTimeout(t);t=setTimeout(load,250)};$("#st").onchange=load;load()}
+async function detail(id){
+ const d=(await api("/api/assets/"+id)).data,a=d.asset;
+ $("#detail").innerHTML=`<div class="panel"><h2>${esc(a.asset_id)}: ${esc(a.name)} ${tag(a.status)}</h2><p class="muted">${esc(a.type_name)}, ${esc(a.location)}. Plan: every ${d.plan[0].interval_days} days, tolerance ${d.plan[0].tolerance_pct}%. Overdue policy: ${a.prohibit_use_when_overdue?"block use":"warn only"}.</p>
+ <h3>Calibration history and certificates</h3>${tbl([["calibration_id","Calibration"],["performed_date","Date"],["result","Result",tag],["deviation_pct","Deviation %"],["next_due_date","Due"],["days_late","Days late"],["cert_id","Certificate",(v,r)=>v?(r.cert_asset_id!==r.asset_id?tag("MISMATCH")+" ":"")+esc(v):tag("MISSING")]],d.calibrations)}
+ <h3>Work orders</h3>${tbl([["wo_id","Work order"],["wo_type","Type"],["opened_date","Opened"],["closed_date","Closed"],["downtime_hours","Downtime h"],["affected_use_count","Affected uses"]],d.work_orders)}
+ <h3>Alerts</h3>${tbl([["alert_type","Type",tag],["severity","Severity",tag],["raised_at","Raised"],["entity_id","Record"]],d.alerts)}
+ <h3>Audit trail</h3>${tbl([["audit_id","ID"],["occurred_at","When"],["action","Action"],["from_state","From"],["to_state","To"],["actor","Actor"]],d.audit)}</div>`;$("#detail").scrollIntoView({behavior:"smooth"})}
+async function alerts(){
+ $("#app").innerHTML=`<h2>Alerts</h2><div class="panel"><div class="row"><label>Type<select id="ty"><option value="">All</option>${["EXPIRED_USE_NO_EXCEPTION","USE_WHILE_QUARANTINED","OVERDUE_USE_NONBLOCKING","DUE_DATE_INCONSISTENT","CERT_ASSET_MISMATCH","MISSING_CERTIFICATE","IMPACT_ASSESSMENT_MISSING","USE_BLOCKED"].map(x=>`<option>${x}</option>`).join("")}</select></label></div></div><div class="panel" id="al"></div>`;
+ const load=async()=>{const r=(await api("/api/alerts?limit=300&type="+$("#ty").value)).data;$("#al").innerHTML=tbl([["alert_id","Alert"],["alert_type","Type",tag],["severity","Severity",tag],["asset_id","Asset"],["entity_id","Record"],["raised_at","Raised"],["status","Status"]],r)};$("#ty").onchange=load;load()}
+async function quality(){
+ const v=(await api("/api/validation")).data,e=(await api("/api/evaluation")).data;
+ if(!v||!e)return $("#app").innerHTML=`<h2>Data quality</h2><p class="err">Validation files not found. Run the generator first.</p>`;
+ const s=e.summary;
+ $("#app").innerHTML=`<h2>Data quality</h2><div class="kpis"><div class="kpi"><b>${v.passed}/${v.passed+v.failed}</b><span>validation checks passed</span></div><div class="kpi"><b>${(s.use_decision_accuracy*100).toFixed(2)}%</b><span>use decisions match ground truth</span></div><div class="kpi"><b>${s.all_findings_match_ground_truth?"Yes":"No"}</b><span>detector findings equal ground truth</span></div><div class="kpi"><b>${s.leakage_columns_in_inputs.length}</b><span>label columns leaked into inputs</span></div></div>
+ <div class="panel"><h3 style="margin-top:0">Detector vs ground truth, per issue type</h3>${tbl([["k","Issue type"],["truth","Truth"],["found","Found"],["fp","False +"],["fn","Missed"],["precision","Precision"],["recall","Recall"]],Object.entries(e.per_issue_type).map(([k,x])=>({k,...x})))}</div>
+ <div class="panel"><h3 style="margin-top:0">Validation checks</h3>${tbl([["check","Check"],["status","Result",tag],["violations","Violations"]],v.checks)}</div>`}
+nav(location.hash.slice(1) in views?location.hash.slice(1):"gate");
+</script></body></html>

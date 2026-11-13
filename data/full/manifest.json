@@ -1,0 +1,44 @@
+{
+ "generator": "calibration.generate v1.0",
+ "command": "python -m calibration.generate --assets 2000 --events 5000 --uses 100000 --seed 20261022 --out data/full",
+ "seed": 20261022,
+ "parameters": {
+  "assets": 2000,
+  "events": 5000,
+  "uses": 100000,
+  "seed": 20261022,
+  "formats": "csv,db",
+  "command": "python -m calibration.generate --assets 2000 --events 5000 --uses 100000 --seed 20261022 --out data/full"
+ },
+ "as_of": "2026-12-31",
+ "row_counts": {
+  "supplier": 14,
+  "instrument_type": 12,
+  "instrument_type_supplier": 48,
+  "asset": 2000,
+  "calibration_plan": 2000,
+  "emergency_extension": 183,
+  "calibration_event": 5000,
+  "certificate": 4900,
+  "work_order": 5591,
+  "production_use": 100000,
+  "alert": 543,
+  "audit_record": 18968
+ },
+ "ground_truth_rows": 895,
+ "sha256": {
+  "csv/supplier.csv": "80f18360f8843f9f3f31366fec0a9f95491b431ba14e0a3da7898d292ef5803c",
+  "csv/instrument_type.csv": "875a373840438bfdae423c1535cbcb2d8cf5bd242cb5dda1ebc90b10eb08954a",
+  "csv/instrument_type_supplier.csv": "e9406571524b790cfe5064843ed27afd3b4d6e3bdae3513b8af108290351d05a",
+  "csv/asset.csv": "8d05c1a8b6a311ebc657d0142bf92da0ab60f3f015c3beca9c08176c9a299dbe",
+  "csv/calibration_plan.csv": "f27380f63ba1be1be031c0e3b3097d42301a1d3b06039cef908e76139663bb23",
+  "csv/emergency_extension.csv": "51230cf70ca84789370c7c4954697372815f98120242f380984afeeef5df3e18",
+  "csv/calibration_event.csv": "6a09c29b043a281e64164ae7cc1cc763a0466f5acee622600142276db08c06b4",
+  "csv/certificate.csv": "19eff66e12525279cd22d4257a4defb67d3ccf229ea7499409cfce9c37b0ceee",
+  "csv/work_order.csv": "bb020515df00595e7cfe2ce49831a5cb4a6f602732bd24a179d61d3917e854c8",
+  "csv/production_use.csv": "a65e0f93c67a7ddd89df2d7af5d038b1d2d4f0f771434af8bdf1991dac743dc0",
+  "csv/alert.csv": "9bc2d214ac0d4bb75876f2edd94dffe8eb517b4695eb726c0e6588c48caaa0d8",
+  "csv/audit_record.csv": "daf41d35f30d2556e28b54b37afa9c4c2007d14eda4f2f6cf533ce39de8f0ac9",
+  "ground_truth/ground_truth.csv": "64f53f7a3031ab661dc670200f0508af6ecdf31a9226175d2b9bd577fa3b60f5"
+ }
+}

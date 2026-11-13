@@ -1,0 +1,15 @@
+supplier_id,name,role,iso17025_accredited,country,status
+SUP-001,Apex Metrology Labs,CALIBRATION_LAB,1,USA,ACTIVE
+SUP-002,Northfield Calibration,CALIBRATION_LAB,1,India,ACTIVE
+SUP-003,Meridian Test & Cal,CALIBRATION_LAB,1,UK,ACTIVE
+SUP-004,Sterling Standards Lab,CALIBRATION_LAB,1,Japan,ACTIVE
+SUP-005,Orion Precision Cal,CALIBRATION_LAB,1,Switzerland,ACTIVE
+SUP-006,Harbor Metrology,CALIBRATION_LAB,1,Germany,ACTIVE
+SUP-007,Keystone Calibration Services,CALIBRATION_LAB,1,USA,ACTIVE
+SUP-008,Vertex Measurement Lab,CALIBRATION_LAB,1,India,ACTIVE
+SUP-009,Fortis Instruments,MANUFACTURER,0,UK,ACTIVE
+SUP-010,Gaugeworks,MANUFACTURER,0,Japan,ACTIVE
+SUP-011,Precisa Devices,MANUFACTURER,0,Switzerland,ACTIVE
+SUP-012,Technomet,MANUFACTURER,0,Germany,ACTIVE
+SUP-013,Alder Sensors,MANUFACTURER,0,USA,ACTIVE
+SUP-014,Brightline Controls,MANUFACTURER,0,India,ACTIVE

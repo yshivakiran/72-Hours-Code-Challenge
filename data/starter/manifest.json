@@ -1,0 +1,44 @@
+{
+ "generator": "calibration.generate v1.0",
+ "command": "python -m calibration.generate --assets 200 --events 500 --uses 10000 --seed 20261022 --out data/starter",
+ "seed": 20261022,
+ "parameters": {
+  "assets": 200,
+  "events": 500,
+  "uses": 10000,
+  "seed": 20261022,
+  "formats": "csv,json,sql,db",
+  "command": "python -m calibration.generate --assets 200 --events 500 --uses 10000 --seed 20261022 --out data/starter"
+ },
+ "as_of": "2026-12-31",
+ "row_counts": {
+  "supplier": 14,
+  "instrument_type": 12,
+  "instrument_type_supplier": 48,
+  "asset": 200,
+  "calibration_plan": 200,
+  "emergency_extension": 16,
+  "calibration_event": 500,
+  "certificate": 490,
+  "work_order": 554,
+  "production_use": 10000,
+  "alert": 39,
+  "audit_record": 1879
+ },
+ "ground_truth_rows": 68,
+ "sha256": {
+  "csv/supplier.csv": "80f18360f8843f9f3f31366fec0a9f95491b431ba14e0a3da7898d292ef5803c",
+  "csv/instrument_type.csv": "875a373840438bfdae423c1535cbcb2d8cf5bd242cb5dda1ebc90b10eb08954a",
+  "csv/instrument_type_supplier.csv": "e9406571524b790cfe5064843ed27afd3b4d6e3bdae3513b8af108290351d05a",
+  "csv/asset.csv": "7877feffaa3805cb3524082f573054a996a2ed051f0a05a00bb0ee3d1cc5fe57",
+  "csv/calibration_plan.csv": "95e13512b11418e4c64e5b6408023782254cd713afbc709d01e0603a5f710713",
+  "csv/emergency_extension.csv": "f35148f03c8ad73ae79ba3384640da5c3c91a5966d575b55e7fbe43e7230ef07",
+  "csv/calibration_event.csv": "cbfa7d3ba69468303742879838c8b8d15ba84acc9fb0203f1f34e186e61aee06",
+  "csv/certificate.csv": "3615faa14afc3ce8cb372deb82886acf60a5b25c098b6f2b8a84a7b702940516",
+  "csv/work_order.csv": "13536238bcb41c34c8e2f1a7cecf93dc3a95686ea393a6c5c339eb9c6617c453",
+  "csv/production_use.csv": "18e25e3e363d15dbe3c90acc48007e4735acc4034298d35ecaa474af30e6847b",
+  "csv/alert.csv": "24cad486e8cc3a3a2245443d496278e974c55f7bbdb7eae80a86bcf0990b9584",
+  "csv/audit_record.csv": "69f44567ca8207c1701c74f442cd6ed35759442e7d86bf060f4a573af0e3812e",
+  "ground_truth/ground_truth.csv": "e79c2db1077146d17b5e3c982330ba88f65ec37ba208d51ace056624f83a4ba3"
+ }
+}
